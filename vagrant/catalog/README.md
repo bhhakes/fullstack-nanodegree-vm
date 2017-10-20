@@ -13,8 +13,17 @@ Prior to loading the package, you should have:
 $ vagrant up
 $ vagrant ssh
 ```
-3. Run 'python models.py' to initialize sqlite3 database
-4. Run 'python application.py' to boot up web server
+3. Run:
+```
+$ python models.py
+```
+to initialize sqlite3 database
+4. Run:
+```
+$ python application.py
+```
+to boot up web server
+
 5. Access "localhost:5000/" to get started building a Golf Course Catalog
 
 ## **Common Usage**
