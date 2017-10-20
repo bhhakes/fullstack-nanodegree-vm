@@ -8,16 +8,19 @@ Prior to loading the package, you should have:
 
 ### Installation
 1. Clone this repo
+
 2. Launch the Vagrant VM (after navigating to the directory in which you saved this repo):
 ```
 $ vagrant up
 $ vagrant ssh
 ```
+
 3. Run:
 ```
 $ python models.py
 ```
 to initialize sqlite3 database
+
 4. Run:
 ```
 $ python application.py
