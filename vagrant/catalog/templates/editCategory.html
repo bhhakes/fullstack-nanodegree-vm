@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width = device-width, initial-scale = 1" name="viewport"><!-- Latest compiled and minified CSS -->
+	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css?v={random number/string}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../static/custom.css">
+
+	<title>
+	</title>
+</head>
+
+<body id="bootstrap-overrides">
+	<!-- Fixed navbar -->
+
+
+	<nav class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<button class="navbar-toggle" data-target=".js-navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="{{url_for('getCatalog')}}">Golf Course Catalog</a>
+		</div>
+
+
+		<div class="collapse navbar-collapse js-navbar-collapse">
+			 <ul class="nav navbar-nav navbar-right">
+				 <li>
+						<a class="profile-pic"><img width="30" height="30" src={{user.picture}}></a>
+				 </li>
+				 <li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button">{{user.username}} <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Account</a></li>
+							<li><a href="{{url_for('gdisconnect')}}">Sign Out</a></li>
+						</ul>
+					</li>
+				</ul>
+		</div><!-- /.nav-collapse -->
+	</nav>
+	<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+	<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+	<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+
+
+	<div class="container">
+		<!-- /container -->
+
+
+		<div class='pane'>
+			<h1>Edit a Course Catagory</h1>
+
+
+			<form action="{{url_for('editCategory',category=category,cat_id=cat_id)}}" method='post'>
+				<p>What would you like to change the {{category}} golf course category to?</p>
+				<input name='name' placeholder="{{category}}" size='30' type='text'> <input type='submit' value='Submit'>
+			</form>
+
+
+			<form action="{{url_for('getCatalog')}}" method="redirect">
+				<input type="submit" value="cancel">
+			</form>
+		</div>
+		<!-- END OF PAGE-SPECIFIC CODE -->
+		<!-- END OF PAGE-SPECIFIC CODE -->
+		<!-- END OF PAGE-SPECIFIC CODE -->
+	</div>
+	<!-- /container -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

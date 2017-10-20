@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width = device-width, initial-scale = 1" name="viewport"><!-- Latest compiled and minified CSS -->
+	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css?v={random number/string}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../static/custom.css">
+
+	<title>
+	</title>
+</head>
+
+<body id="bootstrap-overrides">
+	<!-- Fixed navbar -->
+
+
+	<nav class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<button class="navbar-toggle" data-target=".js-navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="{{url_for('getCatalog')}}">Golf Course Catalog</a>
+		</div>
+
+		<div class="collapse navbar-collapse js-navbar-collapse">
+			 <ul class="nav navbar-nav navbar-right">
+				 <li>
+						<a class="profile-pic"><img width="30" height="30" src={{user.picture}}></a>
+				 </li>
+				 <li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button">{{user.username}} <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Account</a></li>
+							<li><a href="{{url_for('gdisconnect')}}">Sign Out</a></li>
+						</ul>
+					</li>
+				</ul>
+		</div><!-- /.nav-collapse -->
+	</nav>
+	<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+	<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+	<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+
+
+	<div class="container theme-showcase" role="main">
+		{% for c in category %}
+
+		<h1>{{c.name}} Golf Courses</h1>
+		{% with messages = get_flashed_messages() %} {% if messages %}
+
+		<div class="alert alert-success" role="alert">
+			{% for message in messages %} <strong>{{ message }}</strong> {% endfor %}
+		</div>
+		{% endif %} {% endwith %}
+
+		<div class="container">
+			<!-- /container -->
+
+
+			<p><a href="{{url_for('createItem',category=c.name)}}"><button class="btn btn-lg btn-success" type="button">Add a New Course</button></a>
+			</p>
+		</div>
+		<!-- card container -->
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					{% for i in items %}
+
+					<div class="card">
+						<div class="card-image"><img class="img-responsive" src="">
+						</div>
+						<!-- card image -->
+
+
+						<div class="card-content">
+							<span class="card-title" href="{{url_for('getItemDetail',category=c.name,item=i.title,item_id=i.id)}}">{{i.title}}</span> <button aria-label="Left Align" class="btn btn-custom pull-right" id="show" type="button"><i class="fa fa-ellipsis-v"></i></button>
+						</div>
+						<!-- card content -->
+
+
+						<div class="card-action">
+							<a href="{{url_for('getItemDetail',category=c.name,item=i.title,item_id=i.id)}}">View</a> <a href="{{url_for('editItem',category=c.name,item=i.title,item_id=i.id)}}">Edit</a> <a href="{{url_for('deleteItem',item=i.title,category=c.name,item_id=i.id)}}">Delete</a>
+						</div>
+						<!-- card actions -->
+
+
+						<div class="card-reveal">
+							<span class="card-title">{{i.title}}</span> <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+
+							<p>test content here</p>
+						</div>
+						<!-- card reveal -->
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% endfor %} <a href="{{url_for('getCatalog')}}">
+		<h3>Main Menu</h3></a> <!-- END OF PAGE-SPECIFIC CODE -->
+		 <!-- END OF PAGE-SPECIFIC CODE -->
+		 <!-- END OF PAGE-SPECIFIC CODE -->
+	</div>
+	<!-- /container -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

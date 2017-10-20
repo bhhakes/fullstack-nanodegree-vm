@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+  <script type="text/javascript" href="../js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" href="../js/bootstrap.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"\
+   crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../static/custom.css">
+</head>
+
+
+<body id="bootstrap-overrides">
+				<!-- Fixed navbar -->
+			  <nav class="navbar navbar-inverse">
+			    <div class="navbar-header">
+			    	<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+  						<span class="sr-only">Toggle navigation</span>
+  						<span class="icon-bar"></span>
+  						<span class="icon-bar"></span>
+  						<span class="icon-bar"></span>
+  					</button>
+  					<a class="navbar-brand" href="{{url_for('getCatalog')}}">Golf Course Catalog</a>
+  				</div>
+			  </nav>
+
+			<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+			<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+			<!-- BEGINNING OF PAGE-SPECIFIC CODE -->
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+			<div class="special">
+				<div class="jumbotron"
+						 style="background:transparent url('static/The-Castle-Course-1.jpg') no-repeat center center /cover">
+	      	<h1 class="white-out">Your Custom Golf Course Catalog</h1>
+          <div> <!-- /container -->
+    				<p>
+    	        <a href="{{url_for('showLogin')}}"><button type="button" class="btn btn-lg btn-success">Sign-up to Create Your Own Project Today</button>
+    					</a>
+    				</p>
+    			</div>
+	      </div>
+			</div>
+
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+
+        <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <strong> {{ message }} </strong>
+        {% endfor %}
+        </div>
+
+      {% endif %}
+      {% endwith %}
+
+			<!-- Bootstrap core JavaScript -->
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
