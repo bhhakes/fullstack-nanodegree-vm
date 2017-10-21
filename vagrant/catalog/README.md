@@ -15,19 +15,35 @@ $ vagrant up
 $ vagrant ssh
 ```
 
-3. Run:
-```
-$ python models.py
-```
-to initialize sqlite3 database
+3. Create a Google Authentication API Key
 
-4. Run:
+- Go to: https://console.developers.google.com
+- Sign-in using your Google Account
+- Create a new project
+- Once you've created your new project, click on credentials on the left sidebar and 'Create Credentials' and then 'OAuth client ID'
+![Creating Project Credentials on Console.Developers.Google](static/credentials.png "Credential Creation")
+- On the next screen, select 'Web application' and then press 'Create'
+- Give the Client ID a name and authorize JavaScript origins for: http://localhost:5000
+- Authorize Redirect URIs for http://localhost:5000/login
+- Make note of your Project ID, Client ID, and Client secret - you'll need them in the next step
+
+4. Update client_secrets.json with new Client ID and Client Secret
+
+![Updating the Client Secrets JSON File](static/client_secrets_example.png "Client Secrets Ex.")
+- Copy your 'client_id', 'project_id', and 'client_secret' from the last section and paste them into the JSON file.
+- You can also export this file out of the google OAuth credentials creation web site with your 'client_id', 'project_id', and 'client_secret' already ready for you. To ensure proper use in this case, you must also rename the file to 'client_secrets.json', save it in the catalog directory, and add proper redirect_uris and javascript_origins as shown above.
+
+5. To initialize SQLite3 database, run:
+```
+$ python model.py
+```
+
+6. To boot up web server, run:
 ```
 $ python application.py
 ```
-to boot up web server
 
-5. Access "localhost:5000/" to get started building a Golf Course Catalog
+7. Access "localhost:5000/" to get started building a Golf Course Catalog
 
 ## **Common Usage**
 The webserver is usually run via a VirtualBox VM, but can be run on an machine with the ability to host on localhost port 5000.
