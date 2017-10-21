@@ -1,7 +1,15 @@
 # application.py
 from models import Base, User, Category, Item
-from flask import Flask, jsonify, request, redirect,\
-                  url_for, abort, g, render_template, make_response, flash
+from flask import (Flask,
+                   jsonify,
+                   request,
+                   redirect,
+                   url_for,
+                   abort,
+                   g,
+                   render_template,
+                   make_response,
+                   flash)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
@@ -231,7 +239,7 @@ def getCatalog():
 
 
 # view all items within a specific category
-@app.route('/<category>/items')
+@app.route('/<string:category>/items')
 def getCategoryItems(category):
     if 'username' not in login_session:
         return redirect('/index')
@@ -266,7 +274,7 @@ def createNewCategory():
 
 
 # edit a given cateogry
-@app.route('/<category>/<cat_id>/edit', methods=['GET', 'POST'])
+@app.route('/<string:category>/<int:cat_id>/edit', methods=['GET', 'POST'])
 def editCategory(category, cat_id):
     if 'username' not in login_session:
         return redirect('/index')
@@ -298,7 +306,7 @@ def editCategory(category, cat_id):
 
 
 # delete a given cateogry including the items within it
-@app.route('/<category>/<cat_id>/delete', methods=['GET', 'POST'])
+@app.route('/<string:category>/<int:cat_id>/delete', methods=['GET', 'POST'])
 def deleteCategory(category, cat_id):
     if 'username' not in login_session:
         return redirect('/index')
@@ -325,7 +333,7 @@ def deleteCategory(category, cat_id):
 
 
 # view a given item in detail
-@app.route('/<category>/<item>/<item_id>/')
+@app.route('/<string:category>/<string:item>/<int:item_id>/')
 def getItemDetail(category, item, item_id):
     if 'username' not in login_session:
         return redirect('/index')
@@ -341,7 +349,7 @@ def getItemDetail(category, item, item_id):
 
 
 # create a new item
-@app.route('/<category>/newitem', methods=['GET', 'POST'])
+@app.route('/<string:category>/newitem', methods=['GET', 'POST'])
 def createItem(category):
     if 'username' not in login_session:
         return redirect('/index')
@@ -363,7 +371,7 @@ def createItem(category):
 
 
 # edit a given item
-@app.route('/<category>/<item>/<item_id>/edit', methods=['GET', 'POST'])
+@app.route('/<string:category>/<string:item>/<int:item_id>/edit', methods=['GET', 'POST'])
 def editItem(category, item, item_id):
     if 'username' not in login_session:
         return redirect('/index')
@@ -388,7 +396,7 @@ def editItem(category, item, item_id):
 
 
 # delete a given item
-@app.route('/<category>/<item>/<item_id>/delete', methods=['GET', 'POST'])
+@app.route('/<string:category>/<string:item>/<int:item_id>/delete', methods=['GET', 'POST'])
 def deleteItem(category, item, item_id):
     if 'username' not in login_session:
         return redirect('/index')
@@ -409,7 +417,7 @@ def deleteItem(category, item, item_id):
 
 
 # JSON endpoint for a given category
-@app.route('/<category>/JSON')
+@app.route('/<string:category>/JSON')
 def getCategoryJSON(category):
     if 'username' not in login_session:
         return redirect('/index')
@@ -424,7 +432,7 @@ def getCategoryJSON(category):
 
 
 # JSON endpoint for a given item
-@app.route('/<category>/<item>/JSON')
+@app.route('/<string:category>/<string:item>/JSON')
 def getItemJSON(category, item):
     if 'username' not in login_session:
         return redirect('/index')
