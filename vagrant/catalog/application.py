@@ -1,5 +1,6 @@
 # application.py
 from models import Base, User, Category, Item
+from functools import wraps
 from flask import (Flask,
                    jsonify,
                    request,
@@ -203,12 +204,26 @@ def getUserID(email):
     except:
         return None
 
+# login decorator function
+def login_required(f):
+    """
+    A decorator function to check for user login status
+
+    :param f: function
+    :return: Authentication check.
+    """
+    @wraps(f)
+    def decorator_function(*args, **kwargs):
+        if 'username' not in login_session:
+            return redirect('/index')
+        return f(*args, **kwargs)
+    return decorated_function
+
 
 # user account page
 @app.route('/account')
+@login_required
 def showAccount():
-    if 'username' not in login_session:
-        return redirect('/index')
     # account view page
     user = login_session
     return render_template('accountDetail.html', user=user)
@@ -224,12 +239,8 @@ def showIndex():
 # main catalog page, show all categories
 @app.route('/')
 @app.route('/catalog')
+@login_required
 def getCatalog():
-    if 'username' not in login_session:
-        return redirect('/index')
-    # else:
-    #    user_id = getUserID(login_session['email'])
-    #    print user_id
     user = login_session
     user_id = login_session['user_id']
     category = session.query(Category).filter_by(user_id=user_id).all()
@@ -240,9 +251,8 @@ def getCatalog():
 
 # view all items within a specific category
 @app.route('/<string:category>/items')
+@login_required
 def getCategoryItems(category):
-    if 'username' not in login_session:
-        return redirect('/index')
     user = login_session
     user_id = login_session['user_id']
     category = session.query(Category).filter_by(name=category,
@@ -258,9 +268,8 @@ def getCategoryItems(category):
 
 # add new category
 @app.route('/catalog/new', methods=['GET', 'POST'])
+@login_required
 def createNewCategory():
-    if 'username' not in login_session:
-        return redirect('/index')
     if request.method == 'POST':
         newCategory = Category(name=request.form['name'],
                                user_id=login_session['user_id'])
@@ -275,9 +284,8 @@ def createNewCategory():
 
 # edit a given cateogry
 @app.route('/<string:category>/<int:cat_id>/edit', methods=['GET', 'POST'])
+@login_required
 def editCategory(category, cat_id):
-    if 'username' not in login_session:
-        return redirect('/index')
     if request.method == 'POST':
         categoryToEdit = session.query(Category).filter_by(
                                         id=cat_id,
@@ -307,9 +315,8 @@ def editCategory(category, cat_id):
 
 # delete a given cateogry including the items within it
 @app.route('/<string:category>/<int:cat_id>/delete', methods=['GET', 'POST'])
+@login_required
 def deleteCategory(category, cat_id):
-    if 'username' not in login_session:
-        return redirect('/index')
     if request.method == 'POST':
         categoryToDelete = session.query(Category).filter_by(
                                     id=cat_id,
@@ -334,9 +341,8 @@ def deleteCategory(category, cat_id):
 
 # view a given item in detail
 @app.route('/<string:category>/<string:item>/<int:item_id>/')
+@login_required
 def getItemDetail(category, item, item_id):
-    if 'username' not in login_session:
-        return redirect('/index')
     specificItem = session.query(Item).filter_by(
                                     id=item_id,
                                     user_id=login_session['user_id']).one()
@@ -350,9 +356,8 @@ def getItemDetail(category, item, item_id):
 
 # create a new item
 @app.route('/<string:category>/newitem', methods=['GET', 'POST'])
+@login_required
 def createItem(category):
-    if 'username' not in login_session:
-        return redirect('/index')
     if request.method == 'POST':
         newItem = Item(title=request.form['name'],
                        description=request.form['description'],
@@ -372,9 +377,8 @@ def createItem(category):
 
 # edit a given item
 @app.route('/<string:category>/<string:item>/<int:item_id>/edit', methods=['GET', 'POST'])
+@login_required
 def editItem(category, item, item_id):
-    if 'username' not in login_session:
-        return redirect('/index')
     if request.method == 'POST':
         itemToEdit = session.query(Item).filter_by(
                                 id=item_id,
@@ -397,9 +401,8 @@ def editItem(category, item, item_id):
 
 # delete a given item
 @app.route('/<string:category>/<string:item>/<int:item_id>/delete', methods=['GET', 'POST'])
+@login_required
 def deleteItem(category, item, item_id):
-    if 'username' not in login_session:
-        return redirect('/index')
     if request.method == 'POST':
         itemToDelete = session.query(Item).filter_by(
                                 id=item_id,
@@ -418,9 +421,8 @@ def deleteItem(category, item, item_id):
 
 # JSON endpoint for a given category
 @app.route('/<string:category>/JSON')
+@login_required
 def getCategoryJSON(category):
-    if 'username' not in login_session:
-        return redirect('/index')
     category = session.query(Category).filter_by(
                                 name=category,
                                 user_id=login_session['user_id']).all()
@@ -433,9 +435,8 @@ def getCategoryJSON(category):
 
 # JSON endpoint for a given item
 @app.route('/<string:category>/<string:item>/JSON')
+@login_required
 def getItemJSON(category, item):
-    if 'username' not in login_session:
-        return redirect('/index')
     specificItem = session.query(Item).filter_by(
                                 title=item,
                                 user_id=login_session['user_id']).one()
