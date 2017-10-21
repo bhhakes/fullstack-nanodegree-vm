@@ -30,7 +30,7 @@ $ vagrant ssh
 
 4. Update client_secrets.json with new Client ID and Client Secret
 
-![Updating the Client Secrets JSON File](static/client_secrets_example.png "Client Secrets Ex.")
+![Updating the Client Secrets JSON File](static/client_secret_example.png "Client Secrets Ex.")
 - Copy your 'client_id', 'project_id', and 'client_secret' from the last section and paste them into the JSON file.
 - You can also export this file out of the google OAuth credentials creation web site with your 'client_id', 'project_id', and 'client_secret' already ready for you. To ensure proper use in this case, you must also rename the file to 'client_secrets.json', save it in the catalog directory, and add proper redirect_uris and javascript_origins as shown above.
 
