@@ -5,6 +5,7 @@ This package gives anyone with access to the localhost port 5000 and a web brows
 ### Prior to installation
 Prior to loading the package, you should have:
 - Installed [Vagrant](http://vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/)
+- Or have SQLite3, SQLAlchemcy, Flask, and Python installed on your machine and have the ability to host on localhost port 5000.
 
 ### Installation
 1. Clone this repo
@@ -43,7 +44,7 @@ $ python model.py
 $ python application.py
 ```
 
-7. Access "localhost:5000/" to get started building a Golf Course Catalog
+7. Access "localhost:5000/" to get started building a Golf Course Catalog!
 
 ## **Common Usage**
 The webserver is usually run via a VirtualBox VM, but can be run on an machine with the ability to host on localhost port 5000.
