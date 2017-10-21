@@ -217,7 +217,7 @@ def login_required(f):
         if 'username' not in login_session:
             return redirect('/index')
         return f(*args, **kwargs)
-    return decorated_function
+    return decorator_function
 
 
 # user account page
